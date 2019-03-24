@@ -2,18 +2,20 @@
 
 use Faker\Generator as Faker;
 use App\Book;
-use Faker\Provider\Barcode;
+use App\Author;
+
 
 
 $factory->define(Book::class, function (Faker $faker) {
+    $author = Author::pluck('id')->toArray();
     return [
         //
         'title' => $faker->sentence(6),
-        'author' => $faker->name,
+        'author_id' => $faker->randomElement($author),
         'isbn' => $faker->isbn13,
         'published' => $faker->year,
-        'edition' => $faker->randomDigit . 'e druk',
+        'edition' => $faker->randomDigitNotNull . 'e druk',
         'description' => $faker->text(200),
-        'stock' => $faker->randomDigit
+        'aantal' => $faker->randomDigitNotNull
     ];
 });

@@ -22,11 +22,12 @@ class CreateUsersTable extends Migration
             $table->string('first_name');
             $table->string('last_name');
             $table->string('insurance_nr');
-            $table->string('address');
-            $table->string('house_nr');
-            $table->string('bus_nr')->nullable();
-            $table->string('postal_code');
-            $table->string('city');
+//            $table->string('address');
+//            $table->string('house_nr');
+//            $table->string('bus_nr')->nullable();
+//            $table->string('postal_code');
+//            $table->string('city');
+            $table->integer('address_id')->index()->unsigned();
             $table->integer('role_id')->index()->unsigned()->default(2);
             $table->integer('is_active')->default(1);
             $table->rememberToken();

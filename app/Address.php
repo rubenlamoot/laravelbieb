@@ -4,15 +4,14 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Role extends Model
+class Address extends Model
 {
     //
     protected $fillable = [
-        'name'
+        'street', 'house_nr', 'postal_code', 'city'
     ];
 
     public function users(){
         return $this->hasMany('App\User');
     }
 }
-

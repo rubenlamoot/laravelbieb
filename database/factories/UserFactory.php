@@ -27,10 +27,11 @@ $factory->define(User::class, function (Faker $faker) {
         'first_name' => $faker->firstName,
         'last_name' => $faker->lastName,
         'insurance_nr' => Person::rrn(),
-        'address' => $faker->streetName,
-        'house_nr' => $faker->buildingNumber,
-        'postal_code' => $faker->postcode,
-        'city' => $faker->city,
+//        'address' => $faker->streetName,
+//        'house_nr' => $faker->buildingNumber,
+//        'postal_code' => $faker->postcode,
+//        'city' => $faker->city,
+        'address_id' => $faker->numberBetween($min=1, $max=5),
         'role_id' => '2',
         'is_active' => '1'
     ];

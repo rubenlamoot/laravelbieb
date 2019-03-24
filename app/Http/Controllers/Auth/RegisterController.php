@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Auth;
 
+use App\Address;
 use App\User;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Hash;
@@ -54,8 +55,8 @@ class RegisterController extends Controller
             'password' => ['required', 'string', 'min:6', 'confirmed'],
             'first_name' => ['required', 'string', 'max:255'],
             'last_name' => ['required', 'string', 'max:255'],
-            'insurance_nr' => ['required', 'string', 'max:11', 'unique:users'],
-            'address' => ['required', 'string', 'max:255'],
+            'insurance_nr' => ['required', 'string', 'min:11', 'max:11', 'unique:users'],
+            'street' => ['required', 'string', 'max:255'],
             'house_nr' => ['required', 'max:10'],
             'bus_nr' => ['max:10'],
             'postal_code' => ['required', 'string', 'max:20'],
@@ -71,6 +72,20 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
+        $address = new Address();
+        $address->street = $data['street'];
+        $address->house_nr = $data['house_nr'];
+        $address->bus_nr = $data['bus_nr'];
+        $address->postal_code = $data['postal_code'];
+        $address->city = $data['city'];
+        $address = Address::firstOrCreate([
+            'street' => $address->street,
+            'house_nr' => $address->house_nr,
+            'bus_nr' => $address->bus_nr,
+            'postal_code' => $address->postal_code,
+            'city' => $address->city
+        ]);
+
         return User::create([
             'name' => $data['name'],
             'email' => $data['email'],
@@ -78,11 +93,12 @@ class RegisterController extends Controller
             'first_name' => $data['first_name'],
             'last_name' => $data['last_name'],
             'insurance_nr' => $data['insurance_nr'],
-            'address' => $data['address'],
-            'house_nr' => $data['house_nr'],
-            'bus_nr' => $data['bus_nr'],
-            'postal_code' => $data['postal_code'],
-            'city' => $data['city'],
+            'address_id' => $address->id,
+//            'street' => $data['street'],
+//            'house_nr' => $data['house_nr'],
+//            'bus_nr' => $data['bus_nr'],
+//            'postal_code' => $data['postal_code'],
+//            'city' => $data['city'],
         ]);
     }
 }
