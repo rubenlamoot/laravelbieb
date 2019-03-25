@@ -2,12 +2,15 @@
 
 namespace App\Http\Controllers;
 
+use App\Address;
+use App\Http\Requests\UsersEditRequest;
+use App\Role;
 use App\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class AdminUsersController extends Controller
 {
-    //
     /**
      * Display a listing of the resource.
      *
@@ -15,12 +18,9 @@ class AdminUsersController extends Controller
      */
     public function index()
     {
-        // code hier gaat naar admin/users/index.blade.php
-
+        //
         $users = User::all();
-
         return view('admin.users.index', compact('users'));
-
     }
 
     /**
@@ -30,9 +30,7 @@ class AdminUsersController extends Controller
      */
     public function create()
     {
-        // code hier gaat naar admin/users/create.blade.php
-//        $roles = Role::pluck('name', 'id')->all();
-//        return view('admin.users.create', compact('roles'));
+        //
     }
 
     /**
@@ -41,27 +39,9 @@ class AdminUsersController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(UsersRequest $request)
+    public function store(Request $request)
     {
         //
-//        User::create([
-//           'name' => $request['name'],
-//           'email' => $request['email'],
-//           'password' => hash::make($request['password']),
-//           /** 'password' => bcrypt($request['password']) */
-//            'role_id' => $request['role_id'],
-//            'is_active' => $request['is_active']
-//        ]);
-//        $input = $request->all();
-//        if($file = $request->file('photo_id')){
-//            $name = time() . $file->getClientOriginalName();
-//            $file->move('images', $name);
-//            $photo = Photo::create(['file' => $name]);
-//            $input['photo_id'] = $photo->id;
-//        }
-//        $input['password'] = Hash::make($request['password']);
-//        User::create($input);
-//        return redirect('admin/users');
     }
 
     /**
@@ -84,10 +64,10 @@ class AdminUsersController extends Controller
     public function edit($id)
     {
         //
-//        $user = User::findOrFail($id);
-//        $roles = Role::pluck('name', 'id')->all();
-//        return view('/admin.users.edit', compact('user', 'roles'));
+        $user = User::findOrFail($id);
+        $roles = Role::pluck('name', 'id')->all();
 
+        return view('admin.users.edit', compact('user', 'roles'));
     }
 
     /**
@@ -99,29 +79,38 @@ class AdminUsersController extends Controller
      */
     public function update(UsersEditRequest $request, $id)
     {
-        //
-//        $user = User::findOrFail($id);
+        $user = User::findOrFail($id);
+        $address1 = Address::findOrFail($user->address_id);
 
-        /** drie manier om data op te halen :
-        $request->password;
-        $request['password'];
-        $request->get('password'); */
+        $address = new Address();
+        $address->street = $request['street'];
+        $address->house_nr = $request['house_nr'];
+        $address->bus_nr = $request['bus_nr'];
+        $address->postal_code = $request['postal_code'];
+        $address->city = $request['city'];
 
-//        if(trim($request->password) == ''){
-//            $input = $request->except('password');
-//        }else{
-//            $input = $request->all();
-//            $input['password'] = Hash::make($request['password']);
-//        }
-////        $input = $request->all();
-//        if($file = $request->file('photo_id')) {
-//            $name = time() . $file->getClientOriginalName();
-//            $file->move('images', $name);
-//            $photo = Photo::create(['file' => $name]);
-//            $input['photo_id'] = $photo->id;
-//        }
-//        $user->update($input);
-//        return redirect('admin/users');
+        if($address1 == $address){
+            $new_address = $address->id;
+        }else{
+            $aantal = DB::table('users')->where('address_id', $user->address_id)->count();
+            if($aantal > 1){
+                $address->create();
+                $new_address = $address->id;
+            }else{
+                $address->save();
+                $new_address = $address->id;
+            }
+        }
+
+        if(trim($request->password) == ''){
+            $input = $request->except('password', 'street', 'house_nr', 'bus_nr', 'postal_code', 'city');
+        }else{
+            $input = $request->except('street', 'house_nr', 'bus_nr', 'postal_code', 'city');
+            $input['password'] = Hash::make($request['password']);
+        }
+        $input['address_id'] = $new_address;
+        $user->update($input);
+
     }
 
     /**
@@ -132,18 +121,6 @@ class AdminUsersController extends Controller
      */
     public function destroy($id)
     {
-        // korte manier van schrijven
-//        User::findOrFail($id)->delete();
-
-//        $user = User::findOrFail($id);
-//        $user->delete();
-//        $photo = Photo::findOrFail($user->photo_id);
-//        unlink(public_path() . $user->photo->file);
-//        $photo->delete();
-//
-//
-//        Session::flash('deleted_user', 'The user is deleted');
-//        return redirect('/admin/users');
-
+        //
     }
 }

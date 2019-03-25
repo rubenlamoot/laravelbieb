@@ -22,7 +22,7 @@
 
     <!-- Morris Charts CSS -->
     <link href="{{asset('css/morris.css')}}" rel="stylesheet">
-@yield('styles')
+
 <!-- Custom Fonts -->
     <link href="{{asset('css/font-awesome.min.css')}}" rel="stylesheet" type="text/css">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
@@ -90,40 +90,40 @@
                     </li>
 
                     <li>
-                        <a href="#"><i class="fa fa-user fa-fw"></i> Users<span class="fa arrow"></span></a>
+                        <a href="#"><i class="fa fa-user fa-fw"></i> Gebruikers<span class="fa arrow"></span></a>
                         <ul class="nav nav-second-level">
                             <li>
-                                <a href="">All User</a>
+                                <a href="{{route('users.index')}}">Alle gebruikers</a>
                             </li>
                             <li>
-                                <a href="">Create User</a>
+                                <a href="">kweet nog niet</a>
                             </li>
                         </ul>
                         <!-- /.nav-second-level -->
                     </li>
 
-                    <li>
-                        <a href="#"><i class="fa fa-envelope-square fa-fw"></i> Posts<span class="fa arrow"></span></a>
-                        <ul class="nav nav-second-level">
-                            <li>
-                                <a href="">All Posts</a>
-                            </li>
-                            <li>
-                                <a href="">Create Posts</a>
-                            </li>
+                    {{--<li>--}}
+                        {{--<a href="#"><i class="fa fa-envelope-square fa-fw"></i> Posts<span class="fa arrow"></span></a>--}}
+                        {{--<ul class="nav nav-second-level">--}}
+                            {{--<li>--}}
+                                {{--<a href="">All Posts</a>--}}
+                            {{--</li>--}}
+                            {{--<li>--}}
+                                {{--<a href="">Create Posts</a>--}}
+                            {{--</li>--}}
 
-                        </ul>
-                        <!-- /.nav-second-level -->
-                    </li>
-                    <li>
-                        <a href="#"><i class="fa fa-comment fa-fw"></i> Comments<span class="fa arrow"></span></a>
-                        <ul class="nav nav-second-level">
-                            <li>
-                                <a href="">All Comments</a>
-                            </li>
-                        </ul>
-                        <!-- /.nav-second-level -->
-                    </li>
+                        {{--</ul>--}}
+                        {{--<!-- /.nav-second-level -->--}}
+                    {{--</li>--}}
+                    {{--<li>--}}
+                        {{--<a href="#"><i class="fa fa-comment fa-fw"></i> Comments<span class="fa arrow"></span></a>--}}
+                        {{--<ul class="nav nav-second-level">--}}
+                            {{--<li>--}}
+                                {{--<a href="">All Comments</a>--}}
+                            {{--</li>--}}
+                        {{--</ul>--}}
+                        {{--<!-- /.nav-second-level -->--}}
+                    {{--</li>--}}
                 </ul>
             </div>
             <!-- /.sidebar-collapse -->
@@ -141,10 +141,10 @@
         <!-- /.row -->
 
 
-        <!-- /.row -->
+
     @yield('content')
 
-    <!-- /.row -->
+
     </div>
     <!-- /#page-wrapper -->
 
