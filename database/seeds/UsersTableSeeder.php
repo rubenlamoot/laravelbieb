@@ -26,7 +26,7 @@ class UsersTableSeeder extends Seeder
 //            'house_nr' => '5',
 //            'postal_code' => '8647',
 //            'city' => 'Lo-Reninge',
-            'address_id' => 6,
+//            'address_id' => 6,
             'role_id' => 1,
             'is_active' => 1,
             'created_at' => now(),

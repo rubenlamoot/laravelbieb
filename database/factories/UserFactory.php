@@ -31,7 +31,7 @@ $factory->define(User::class, function (Faker $faker) {
 //        'house_nr' => $faker->buildingNumber,
 //        'postal_code' => $faker->postcode,
 //        'city' => $faker->city,
-        'address_id' => $faker->numberBetween($min=1, $max=5),
+//        'address_id' => $faker->numberBetween($min=1, $max=5),
         'role_id' => '2',
         'is_active' => '1'
     ];

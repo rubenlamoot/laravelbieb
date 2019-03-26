@@ -43,33 +43,35 @@
         </div>
 
         <div class="col-md-6">
+            @foreach($user->addresses as $address)
             <div class="form-group">
                 {!! Form::label('street', 'Straat') !!}
-                {!! Form::text('street', $user->address->street, ['class' => 'form-control']) !!}
+                {!! Form::text('street', $address->street, ['class' => 'form-control']) !!}
             </div>
 
             <div class="form-group">
                 {!! Form::label('house_nr', 'Huisnummer') !!}
-                {!! Form::text('house_nr', $user->address->house_nr, ['class' => 'form-control']) !!}
+                {!! Form::text('house_nr', $address->house_nr, ['class' => 'form-control']) !!}
             </div>
 
             <div class="form-group">
                 {!! Form::label('bus_nr', 'Busnummer') !!}
-                {!! Form::text('bus_nr', $user->address->bus_nr, ['class' => 'form-control']) !!}
+                {!! Form::text('bus_nr', $address->bus_nr, ['class' => 'form-control']) !!}
             </div>
 
             <div class="form-group">
                 {!! Form::label('postal_code', 'Postcode') !!}
-                {!! Form::text('postal_code', $user->address->postal_code, ['class' => 'form-control']) !!}
+                {!! Form::text('postal_code', $address->postal_code, ['class' => 'form-control']) !!}
             </div>
             <div class="form-group">
                 {!! Form::label('city', 'Stad') !!}
-                {!! Form::text('city', $user->address->city, ['class' => 'form-control']) !!}
+                {!! Form::text('city', $address->city, ['class' => 'form-control']) !!}
             </div>
+                @endforeach
         </div>
     </div>
     <div class="form-group">
-        {!! Form::submit('Gebruiker wijzigen', ['class' => 'btn btn-primary']) !!}
+        {!! Form::submit('Gebruiker wijzigen', ['class' => 'btn btn-primary my-3']) !!}
     </div>
     {!! Form::close() !!}
 

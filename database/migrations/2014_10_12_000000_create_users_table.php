@@ -27,7 +27,7 @@ class CreateUsersTable extends Migration
 //            $table->string('bus_nr')->nullable();
 //            $table->string('postal_code');
 //            $table->string('city');
-            $table->integer('address_id')->index()->unsigned();
+//            $table->integer('address_id')->index()->unsigned();
             $table->integer('role_id')->index()->unsigned()->default(2);
             $table->integer('is_active')->default(1);
             $table->rememberToken();
