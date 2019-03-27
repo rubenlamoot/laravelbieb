@@ -101,7 +101,8 @@ class RegisterController extends Controller
 //            'city' => $data['city'],
         ]);
         $user->addresses()->save($address);
-        $address->users()->save($user);
+
+
 
         return $user;
     }

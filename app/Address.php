@@ -8,7 +8,7 @@ class Address extends Model
 {
     //
     protected $fillable = [
-        'street', 'house_nr', 'postal_code', 'city'
+        'street', 'house_nr', 'bus_nr', 'postal_code', 'city'
     ];
 
     public function users(){
