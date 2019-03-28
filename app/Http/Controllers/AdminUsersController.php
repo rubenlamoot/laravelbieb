@@ -80,14 +80,9 @@ class AdminUsersController extends Controller
     {
 
         $user = User::findOrFail($id);
-        $address1 = Address::findOrFail($user->addresses);
+//        $address1 = Address::findOrFail($user->addresses);
+        $address1 = $user->addresses;
 
-//        $address = new Address();
-//        $address->street = $request['street'];
-//        $address->house_nr = $request['house_nr'];
-//        $address->bus_nr = $request['bus_nr'];
-//        $address->postal_code = $request['postal_code'];
-//        $address->city = $request['city'];
         $input_address = $request->except('name', 'email', 'password', 'first_name', 'last_name', 'insurance_nr');
 
         if(trim($request->password) == ''){
@@ -103,18 +98,13 @@ class AdminUsersController extends Controller
             $aantal = DB::table('address_user')->where('address_id', $address1[0]->id)->count();
 
             if($aantal > 1){
-                $address = Address::create($input_address);
-                $address->users()->update(['user_id' => $user->id, 'address_id' => $address->id ]);
-                dd($address);
+                $address = Address::Create($input_address);
+                $address->update_address_user($user->id, $address1[0]->id, $address->id);
             }else{
                 $address1[0]->update($input_address);
 
             }
         }
-
-
-
-
 
         return redirect('admin/users');
     }

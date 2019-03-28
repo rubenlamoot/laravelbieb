@@ -15,9 +15,15 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+
 Auth::routes();
 
-Route::get('/home', 'HomeController@index')->name('home');
+//Route::get('/home', 'HomeController@index')->name('home');
+
+Route::group(['middleware' => 'auth'], function () {
+    Route::get('/home','HomeController@index');
+    Route::resource('/users', 'UsersController');
+});
 
 Route::group(['middleware' => 'admin'], function () {
     Route::get('/admin','HomeController@index');
