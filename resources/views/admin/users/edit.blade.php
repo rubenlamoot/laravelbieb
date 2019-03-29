@@ -17,7 +17,7 @@
             </div>
 
             <div class="form-group">
-                {!! Form::label('password', 'Password') !!}
+                {!! Form::label('password', 'Paswoord') !!}
                 {!! Form::password('password', ['class' => 'form-control']) !!}
             </div>
 

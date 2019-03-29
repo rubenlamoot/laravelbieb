@@ -86,13 +86,16 @@
 
                     </li>
                     <li>
+                        <a href="{{url('/')}}"><i class="fa fa-dashboard fa-fw"></i> Home</a>
+                    </li>
+                    <li>
                         <a href="#"><i class="fa fa-user fa-fw"></i> Gegevens<span class="fa arrow"></span></a>
                         <ul class="nav nav-second-level">
                             <li>
                                 <a href="{{url('/users')}}">Bekijk je gegevens</a>
                             </li>
                             <li>
-                                <a href="">Verander je gegevens</a>
+                                <a href="{{url('/users/' .Auth::user()->id .'/edit')}}">Verander je gegevens</a>
                             </li>
                         </ul>
 

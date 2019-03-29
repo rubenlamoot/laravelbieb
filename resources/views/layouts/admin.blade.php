@@ -95,11 +95,19 @@
                             <li>
                                 <a href="{{route('users.index')}}">Alle gebruikers</a>
                             </li>
+                        </ul>
+                    </li>
+
+                    <li>
+                        <a href="#"><i class="fa fa-book fa-fw"></i> Boeken<span class="fa arrow"></span></a>
+                        <ul class="nav nav-second-level">
                             <li>
-                                <a href="">kweet nog niet</a>
+                                <a href="{{route('books.index')}}">Alle boeken</a>
+                            </li>
+                            <li>
+                                <a href="{{route('books.create')}}">Nieuw boek</a>
                             </li>
                         </ul>
-                        <!-- /.nav-second-level -->
                     </li>
 
                     {{--<li>--}}
@@ -134,7 +142,7 @@
     <div id="page-wrapper">
         <div class="row">
             <div class="col-lg-12">
-                <h1 class="page-header">Dashboard</h1>
+                <h1 class="page-header">Dashboard van bibliothecaris {{ Auth::user()->name }}</h1>
             </div>
             <!-- /.col-lg-12 -->
         </div>

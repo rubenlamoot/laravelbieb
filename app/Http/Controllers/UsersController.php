@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\UsersEditRequest;
 use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -62,6 +63,8 @@ class UsersController extends Controller
     public function edit($id)
     {
         //
+        $user = User::findOrFail($id);
+        return view('users.edit', compact('user'));
     }
 
     /**
@@ -71,9 +74,36 @@ class UsersController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(UsersEditRequest $request, $id)
     {
         //
+        $user = User::findOrFail($id);
+        $address1 = $user->addresses;
+
+        $input_address = $request->except('name', 'email', 'password', 'first_name', 'last_name', 'insurance_nr');
+
+        if(trim($request->password) == ''){
+            $input = $request->except('password', 'street', 'house_nr', 'bus_nr', 'postal_code', 'city');
+        }else{
+            $input = $request->except('street', 'house_nr', 'bus_nr', 'postal_code', 'city');
+            $input['password'] = Hash::make($request['password']);
+        }
+        $user->update($input);
+        if(($address1[0]->street == $input_address['street']) && ($address1[0]->house_nr == $input_address['house_nr']) && ($address1[0]->bus_nr == $input_address['bus_nr']) && ($address1[0]->postal_code == $input_address['postal_code']) && ($address1[0]->city == $input_address['city'])){
+
+        }else{
+            $aantal = DB::table('address_user')->where('address_id', $address1[0]->id)->count();
+
+            if($aantal > 1){
+                $address = Address::Create($input_address);
+                $address->update_address_user($user->id, $address1[0]->id, $address->id);
+            }else{
+                $address1[0]->update($input_address);
+
+            }
+        }
+
+        return redirect('users');
     }
 
     /**
