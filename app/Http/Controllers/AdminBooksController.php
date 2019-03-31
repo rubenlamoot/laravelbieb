@@ -76,6 +76,10 @@ class AdminBooksController extends Controller
     public function edit($id)
     {
         //
+        $book = Book::findOrFail($id);
+        $authors = Author::pluck('name', 'id')->all();
+
+        return view('admin.books.edit', compact('book', 'authors'));
     }
 
     /**
@@ -85,9 +89,33 @@ class AdminBooksController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(BooksRequest $request, $id)
     {
         //
+        $book = Book::findOrFail($id);
+        $input = $request->all();
+
+        if($file = $request->file('photo_id')){
+            $old_photo = Photo::findOrFail($book->photo_id);
+            if($old_photo){
+                $old_file = "images/" . $old_photo->filename;
+                if (file_exists($old_file)) {
+                    @unlink($old_file);
+                }
+                $name = time() . $file->getClientOriginalName();
+                $file->move('images', $name);
+                $old_photo->update(['filename' => $name]);
+                $input['photo_id'] = $old_photo->id;
+            }else{
+                $name = time() . $file->getClientOriginalName();
+                $file->move('images', $name);
+                $photo = Photo::create(['filename' => $name]);
+                $input['photo_id'] = $photo->id;
+            }
+        }
+        $book->update($input);
+
+        return redirect('admin/books');
     }
 
     /**

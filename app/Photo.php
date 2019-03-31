@@ -7,13 +7,13 @@ use Illuminate\Database\Eloquent\Model;
 class Photo extends Model
 {
     //
-    protected $uploads = '/images/';
+//    protected $uploads = '/images/';
 
     protected $fillable = [
         'filename'
     ];
 
-    public function Book(){
+    public function book(){
         return $this->belongsTo('App\Book');
     }
 

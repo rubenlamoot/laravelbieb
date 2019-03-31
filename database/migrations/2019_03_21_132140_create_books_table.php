@@ -21,7 +21,7 @@ class CreateBooksTable extends Migration
             $table->year('published');
             $table->string('edition');
             $table->text('description');
-            $table->string('photo_id')->default('');
+            $table->integer('photo_id')->nullable()->index()->unsigned();
             $table->integer('aantal');
             $table->timestamps();
         });

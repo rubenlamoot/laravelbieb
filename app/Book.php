@@ -8,14 +8,14 @@ class Book extends Model
 {
     //
     protected $fillable = [
-        'title', 'author_id', 'isbn', 'published', 'edition', 'description', 'aantal'
+        'title', 'author_id', 'isbn', 'published', 'edition', 'description', 'photo_id', 'aantal'
     ];
 
     public function author(){
         return $this->belongsTo('App\Author');
     }
 
-    public function book(){
+    public function photo(){
         return $this->belongsTo('App\Photo');
     }
 }

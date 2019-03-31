@@ -16,6 +16,7 @@ $factory->define(Book::class, function (Faker $faker) {
         'published' => $faker->year,
         'edition' => $faker->randomDigitNotNull . 'e druk',
         'description' => $faker->text(200),
+        'photo_id' => 1,
         'aantal' => $faker->randomDigitNotNull
     ];
 });

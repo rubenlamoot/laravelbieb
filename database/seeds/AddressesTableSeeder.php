@@ -21,5 +21,13 @@ class AddressesTableSeeder extends Seeder
             'created_at' => now(),
             'updated_at' => now(),
         ]);
+        DB::table('addresses')->insert([
+            'street' => 'Testlaan',
+            'house_nr' => '1',
+            'postal_code' => '8000',
+            'city' => 'Brugge',
+            'created_at' => now(),
+            'updated_at' => now(),
+        ]);
     }
 }

@@ -9,7 +9,7 @@ class DatabaseSeeder extends Seeder
      *
      * @return void
      */
-    protected $toTruncate = ['addresses', 'users', 'roles', 'authors', 'books'];
+    protected $toTruncate = ['addresses', 'users', 'roles', 'authors', 'books', 'address_user', 'photos'];
 
     public function run()
     {
@@ -22,6 +22,8 @@ class DatabaseSeeder extends Seeder
         $this->call(RolesTableSeeder::class);
         $this->call(AuthorsTableSeeder::class);
         $this->call(BooksTableSeeder::class);
+        $this->call(AddressUserTableSeeder::class);
+        $this->call(PhotosTableSeeder::class);
 
         DB::statement('SET FOREIGN_KEY_CHECKS=1');
     }
