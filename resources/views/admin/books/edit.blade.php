@@ -58,4 +58,5 @@
     </div>
     {!! Form::close() !!}
 
+    @include('includes.form-error')
 @stop

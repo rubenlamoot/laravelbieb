@@ -110,28 +110,31 @@
                         </ul>
                     </li>
 
-                    {{--<li>--}}
-                        {{--<a href="#"><i class="fa fa-envelope-square fa-fw"></i> Posts<span class="fa arrow"></span></a>--}}
-                        {{--<ul class="nav nav-second-level">--}}
-                            {{--<li>--}}
-                                {{--<a href="">All Posts</a>--}}
-                            {{--</li>--}}
-                            {{--<li>--}}
-                                {{--<a href="">Create Posts</a>--}}
-                            {{--</li>--}}
+                    <li>
+                        <a href="#"><i class="fa fa-pen fa-fw"></i> Auteurs<span class="fa arrow"></span></a>
+                        <ul class="nav nav-second-level">
+                            <li>
+                                <a href="{{route('authors.index')}}">Alle auteurs</a>
+                            </li>
+                            <li>
+                                <a href="{{route('authors.create')}}">Nieuwe auteur</a>
+                            </li>
+                        </ul>
+                    </li>
 
-                        {{--</ul>--}}
-                        {{--<!-- /.nav-second-level -->--}}
-                    {{--</li>--}}
-                    {{--<li>--}}
-                        {{--<a href="#"><i class="fa fa-comment fa-fw"></i> Comments<span class="fa arrow"></span></a>--}}
-                        {{--<ul class="nav nav-second-level">--}}
-                            {{--<li>--}}
-                                {{--<a href="">All Comments</a>--}}
-                            {{--</li>--}}
-                        {{--</ul>--}}
-                        {{--<!-- /.nav-second-level -->--}}
-                    {{--</li>--}}
+                    <li>
+                        <a href="#"><i class="fa fa-book-open fa-fw"></i> Ontleningen<span class="fa arrow"></span></a>
+                        <ul class="nav nav-second-level">
+                            <li>
+                                <a href="{{route('rentals.index')}}">Alle ontleningen</a>
+                            </li>
+                            <li>
+                                <a href="{{route('rentals.create')}}">Nieuwe ontlening</a>
+                            </li>
+                        </ul>
+                    </li>
+
+
                 </ul>
             </div>
             <!-- /.sidebar-collapse -->

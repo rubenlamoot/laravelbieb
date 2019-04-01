@@ -18,4 +18,8 @@ class Book extends Model
     public function photo(){
         return $this->belongsTo('App\Photo');
     }
+
+    public function rentals(){
+        return $this->belongsToMany('App\Rental');
+    }
 }

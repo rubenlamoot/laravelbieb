@@ -74,5 +74,5 @@
         {!! Form::submit('Gebruiker wijzigen', ['class' => 'btn btn-primary my-3']) !!}
     </div>
     {!! Form::close() !!}
-
+    @include('includes.form-error')
 @stop

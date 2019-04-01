@@ -41,4 +41,6 @@
         {!! Form::submit('Geef boek in', ['class'=>'btn btn-primary']) !!}
     </div>
     {!! Form::close() !!}
+
+    @include('includes.form-error')
 @stop

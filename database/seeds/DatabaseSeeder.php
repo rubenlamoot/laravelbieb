@@ -9,7 +9,8 @@ class DatabaseSeeder extends Seeder
      *
      * @return void
      */
-    protected $toTruncate = ['addresses', 'users', 'roles', 'authors', 'books', 'address_user', 'photos'];
+    protected $toTruncate = ['users', 'roles', 'books', 'authors', 'addresses', 'address_user', 'photos'];
+
 
     public function run()
     {

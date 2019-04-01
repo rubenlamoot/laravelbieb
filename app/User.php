@@ -43,6 +43,9 @@ class User extends Authenticatable
     public function addresses(){
         return $this->belongsToMany('App\Address');
     }
+    public function rentals(){
+        return $this->belongsToMany('App\Rental');
+    }
 
     public function isAdmin(){
         if($this->role->id == 1 && $this->is_active == 1){

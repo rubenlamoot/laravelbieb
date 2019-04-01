@@ -18,7 +18,7 @@ class AdminBooksController extends Controller
     public function index()
     {
         //
-        $books = Book::paginate(15);
+        $books = Book::orderBy('id', 'desc')->paginate(15);
         return view('admin.books.index', compact('books'));
     }
 
