@@ -129,6 +129,9 @@
                                 <a href="{{route('rentals.index')}}">Alle ontleningen</a>
                             </li>
                             <li>
+                                <a href="{{route('rentals.open')}}">Alle openstaande ontleningen</a>
+                            </li>
+                            <li>
                                 <a href="{{route('rentals.create')}}">Nieuwe ontlening</a>
                             </li>
                         </ul>

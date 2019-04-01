@@ -44,7 +44,7 @@ class User extends Authenticatable
         return $this->belongsToMany('App\Address');
     }
     public function rentals(){
-        return $this->belongsToMany('App\Rental');
+        return $this->hasMany('App\Rental');
     }
 
     public function isAdmin(){

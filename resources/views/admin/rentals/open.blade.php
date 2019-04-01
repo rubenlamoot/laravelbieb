@@ -1,7 +1,7 @@
 @extends('layouts.admin')
 
 @section('content')
-    <h1>Alle ontleningen</h1>
+    <h1>Alle openstaande ontleningen</h1>
 
     <table class="table table-striped">
         <thead>
@@ -22,11 +22,12 @@
                     <td>{{$rental->book->title}}</td>
                     <td>{{$rental->book_out}}</td>
                     <td>@if ($rental->book_in == NULL)
-                        <a href="{{route('rentals.edit', $rental->id)}}" class="btn btn-success">Terug brengen</a>
+                            <a href="{{route('rentals.edit', $rental->id)}}" class="btn btn-success">Terug brengen</a>
                         @else
-                        {{$rental->book_in}}
+                            {{$rental->book_in}}
                         @endif
                     </td>
+
                 </tr>
             @endforeach
         @endif

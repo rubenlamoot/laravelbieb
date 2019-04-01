@@ -27,9 +27,14 @@ Route::group(['middleware' => 'auth'], function () {
 
 Route::group(['middleware' => 'admin'], function () {
     Route::get('/admin','HomeController@index');
+    Route::get('/admin/rentals/open', 'AdminRentalsController@open')->name('rentals.open');
     Route::resource('/admin/users', 'AdminUsersController');
     Route::resource('/admin/books', 'AdminBooksController');
     Route::resource('/admin/authors', 'AdminAuthorsController');
+
     Route::resource('/admin/rentals', 'AdminRentalsController');
+
+//    Route::get('admin/rentals/open', 'AdminRentalsController@open')->name('rentals.open');
+
 
 });

@@ -20,6 +20,6 @@ class Book extends Model
     }
 
     public function rentals(){
-        return $this->belongsToMany('App\Rental');
+        return $this->hasMany('App\Rental');
     }
 }

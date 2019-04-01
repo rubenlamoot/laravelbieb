@@ -51,11 +51,16 @@ class AdminRentalsController extends Controller
     {
         //
         $input = $request->all();
-        $input['book_out'] = now();
+        $user_rentals = Rental::where('user_id', $input['user_id'])->get();
+        $total_rentals = count($user_rentals);
+        if($total_rentals >= 7){
+            echo("Deze gebruiker heeft reeds zeven boeken ontleend. Dit is het maximum.");
+        }else{
+            $input['book_out'] = now();
+            Rental::create($input);
+            return redirect('admin\rentals');
+        }
 
-        Rental::create($input);
-
-        return redirect('admin\rentals');
     }
 
     /**
@@ -78,6 +83,8 @@ class AdminRentalsController extends Controller
     public function edit($id)
     {
         //
+        $rental = Rental::findOrFail($id);
+        return view('admin.rentals.edit', compact('rental'));
     }
 
     /**
@@ -90,6 +97,12 @@ class AdminRentalsController extends Controller
     public function update(Request $request, $id)
     {
         //
+        $rental = Rental::findOrFail($id);
+        $rental->book_in = now();
+        $rental->update();
+
+        return redirect('admin/rentals');
+
     }
 
     /**
@@ -101,5 +114,13 @@ class AdminRentalsController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    /** Toon alle openstaande ontleningen */
+    public function open(){
+        $rentals = Rental::where('book_in', NULL)->paginate(15);
+
+
+        return view('admin.rentals.open', compact('rentals'));
     }
 }
