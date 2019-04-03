@@ -6,8 +6,10 @@ use App\Book;
 use App\Http\Requests\RentalsRequest;
 use App\Rental;
 use App\User;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Arr;
+use Illuminate\Support\Facades\Auth;
 
 class AdminRentalsController extends Controller
 {
@@ -19,6 +21,7 @@ class AdminRentalsController extends Controller
     public function index()
     {
         //
+
         $rentals = Rental::paginate(15);
 
         return view('admin.rentals.index', compact('rentals'));
@@ -51,10 +54,15 @@ class AdminRentalsController extends Controller
     {
         //
         $input = $request->all();
-        $user_rentals = Rental::where('user_id', $input['user_id'])->get();
+        $user_rentals = Rental::where([['user_id', $input['user_id']], ['book_in', NULL]])->get();
         $total_rentals = count($user_rentals);
+        $book_rentals = Rental::where([['book_id', $input['book_id']], ['book_in', NULL]])->get();
+        $total_books_rented = count($book_rentals);
+        $total_books = Book::findOrFail($input['book_id']);
         if($total_rentals >= 7){
-            echo("Deze gebruiker heeft reeds zeven boeken ontleend. Dit is het maximum.");
+            return redirect()->back()->with('alert', 'Sorry, deze gebruiker heeft reeds zeven boeken ontleend. Dit is het maximum.');
+        }elseif($total_books_rented >= $total_books->aantal){
+            return redirect()->back()->with('alert', 'Sorry, alle exemplaren van dit boek zijn reeds uitgeleend.');
         }else{
             $input['book_out'] = now();
             Rental::create($input);
@@ -123,4 +131,32 @@ class AdminRentalsController extends Controller
 
         return view('admin.rentals.open', compact('rentals'));
     }
+    /** Toon alle openstaande ontleningen die te laat binnen zijn*/
+    public function late(){
+        $date = Carbon::now();
+
+        if(Auth::check()){
+            if(Auth::user()->isAdmin()){
+                $rentals = Rental::where([['book_in', NULL], ['book_out', '<', $date->subDays(14)]])->paginate(15);
+            }else{
+                $rentals = Rental::where([['user_id', Auth::user()->id],['book_in', NULL], ['book_out', '<', $date->subDays(14)]])->paginate(15);
+            }
+        }
+        return view('admin.rentals.late', compact('rentals'));
+    }
+    /** Toon alle ontleningen van een bepaalde user */
+    public function user(){
+        $rentals = Rental::where('user_id', Auth::user()->id)->orderBy('book_out', 'desc')->paginate(15);
+
+        return view('admin.rentals.user', compact('rentals'));
+    }
+    /** Toon alle ontlening van een user die te laat binnen zijn */
+    public function user_late(){
+        $date = Carbon::now();
+
+        $rentals = Rental::where([['user_id', Auth::user()->id],['book_in', NULL], ['book_out', '<', $date->subDays(14)]])->paginate(15);
+
+        return view('admin.rentals.user_late', compact('rentals'));
+    }
+
 }

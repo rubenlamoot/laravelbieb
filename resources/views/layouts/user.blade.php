@@ -98,8 +98,32 @@
                                 <a href="{{url('/users/' .Auth::user()->id .'/edit')}}">Verander je gegevens</a>
                             </li>
                         </ul>
-
                     </li>
+                    <li>
+                        <a href="#"><i class="fa fa-book-open fa-fw"></i> Ontleningen<span class="fa arrow"></span></a>
+                        <ul class="nav nav-second-level">
+                            <li>
+                                <a href="{{route('rentals.user')}}">Mijn ontleningen</a>
+                            </li>
+
+                            <li>
+                                <a href="{{route('rentals.user_late')}}">Mijn openstaande boetes</a>
+                            </li>
+                            <li>
+                                <a href="">Nieuwe ontlening</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="#"><i class="fa fa-book fa-fw"></i> Boeken<span class="fa arrow"></span></a>
+                        <ul class="nav nav-second-level">
+                            <li>
+                                <a href="{{route('books.search')}}">Zoek boek</a>
+                            </li>
+
+                        </ul>
+                    </li>
+
 
 
                 </ul>
@@ -117,11 +141,7 @@
             <!-- /.col-lg-12 -->
         </div>
         <!-- /.row -->
-
-
-
         @yield('content')
-
 
     </div>
     <!-- /#page-wrapper -->

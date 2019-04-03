@@ -128,4 +128,10 @@ class AdminBooksController extends Controller
     {
         //
     }
+
+    public function search(){
+
+
+        return view('admin.books.search');
+    }
 }

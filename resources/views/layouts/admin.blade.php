@@ -132,6 +132,9 @@
                                 <a href="{{route('rentals.open')}}">Alle openstaande ontleningen</a>
                             </li>
                             <li>
+                                <a href="{{route('rentals.late')}}">Alle openstaande boetes</a>
+                            </li>
+                            <li>
                                 <a href="{{route('rentals.create')}}">Nieuwe ontlening</a>
                             </li>
                         </ul>
@@ -153,11 +156,7 @@
             <!-- /.col-lg-12 -->
         </div>
         <!-- /.row -->
-
-
-
     @yield('content')
-
 
     </div>
     <!-- /#page-wrapper -->
