@@ -22,7 +22,12 @@
                     <td>{{$rental->book->title}}</td>
                     <td>{{$rental->book_out}}</td>
                     <td>@if ($rental->book_in == NULL)
-                            <a href="{{route('rentals.edit', $rental->id)}}" class="btn btn-success">Terug brengen</a>
+                            {!! Form::model($rental, ['method'=>'PATCH', 'action'=>['AdminRentalsController@update', $rental->id]]) !!}
+
+                            <div class="form-group">
+                                {!! Form::submit('Terug brengen', ['class'=>'btn btn-primary']) !!}
+                            </div>
+                            {!! Form::close() !!}
                         @else
                             {{$rental->book_in}}
                         @endif

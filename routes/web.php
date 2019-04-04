@@ -14,6 +14,7 @@
 Route::get('/', function () {
     return view('welcome');
 });
+Route::get('/result', 'FrontController@search');
 
 
 Auth::routes();
@@ -24,12 +25,16 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('/home','HomeController@index');
     Route::get('/admin/rentals/user', 'AdminRentalsController@user')->name('rentals.user');
     Route::get('/admin/rentals/user_late', 'AdminRentalsController@user_late')->name('rentals.user_late');
-//    Route::get('/admin/books/search', 'AdminBooksController@search')->name('books.search');
+    Route::post('/admin/rentals/user','AdminRentalsController@user_rent');
+    Route::patch('/admin/rentals/user','AdminRentalsController@user_rent_back');
+//    Route::get('/admin/books/result', 'FrontController@search')->name('books.result');
+    Route::get('/admin/books/book_detail/{id?}', 'AdminBooksController@book_detail')->name('books.book_detail');
     Route::get('/admin/books/search', function (){
         return view('admin.books.search');
     })->name('books.search');
 
     Route::resource('/users', 'UsersController');
+
 });
 
 Route::group(['middleware' => 'admin'], function () {
@@ -39,8 +44,9 @@ Route::group(['middleware' => 'admin'], function () {
     Route::resource('/admin/users', 'AdminUsersController');
     Route::resource('/admin/books', 'AdminBooksController');
     Route::resource('/admin/authors', 'AdminAuthorsController');
-
     Route::resource('/admin/rentals', 'AdminRentalsController');
+
+
 
 
 

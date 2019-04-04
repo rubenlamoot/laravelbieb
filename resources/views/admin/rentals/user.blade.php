@@ -19,7 +19,17 @@
                 <td>{{$rental->book->title}}</td>
                 <td>{{$rental->book->author->name}}</td>
                 <td>{{$rental->book_out}}</td>
-                <td>{{$rental->book_in}}</td>
+                <td>@if ($rental->book_in == NULL)
+                        {!! Form::open(['method'=>'PATCH', 'action'=>'AdminRentalsController@user_rent_back']) !!}
+
+                        <input type="hidden" name="id" value="{{$rental->id}}">
+                        <div class="form-group">
+                            {!! Form::submit('Terug brengen', ['class'=>'btn btn-primary']) !!}
+                        </div>
+                        {!! Form::close() !!}
+                    @else
+                        {{$rental->book_in}}
+                    @endif</td>
             </tr>
         @endforeach
 

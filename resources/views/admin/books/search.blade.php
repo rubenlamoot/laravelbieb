@@ -5,21 +5,25 @@
 
     <div class="row">
         <div class="col-md-6 offset-md-3">
-            <form action="" method="post">
-                <div class="form-group">
-                    <label for="searchAuthor">Zoeken op auteur</label>
-                    <input type="text" class="form-control" id="searchAuthor" placeholder="zoek op auteur">
-                </div>
-                <div class="form-group">
-                    <label for="searchTitle">Zoeken op titel</label>
-                    <input type="text" class="form-control" id="searchTitle" placeholder="zoek op titel">
-                </div>
-                <div class="form-group">
-                    <label for="searchWords">Zoeken op auteur</label>
-                    <input type="text" class="form-control" id="searchWords" placeholder="zoek op inhoud">
-                </div>
-                <button type="submit" class="btn btn-primary">Zoeken</button>
-            </form>
+            {!! Form::open(['method' => 'GET', 'action' => 'FrontController@search']) !!}
+
+            <div class="form-group">
+                {!! Form::label('searchAuthor', 'Zoeken op auteur:') !!}
+                {!! Form::text('searchAuthor', null, ['class'=>'form-control']) !!}
+            </div>
+            <div class="form-group">
+                {!! Form::label('searchTitle', 'Zoeken op titel:') !!}
+                {!! Form::text('searchTitle', null, ['class'=>'form-control']) !!}
+            </div>
+            <div class="form-group">
+                {!! Form::label('searchWords', 'Zoeken op woorden:') !!}
+                {!! Form::text('searchWords', null, ['class'=>'form-control']) !!}
+            </div>
+
+            <div class="form-group">
+                {!! Form::submit('Zoeken', ['class'=>'btn btn-primary']) !!}
+            </div>
+            {!! Form::close() !!}
         </div>
     </div>
 @stop

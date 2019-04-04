@@ -66,7 +66,7 @@ class AdminRentalsController extends Controller
         }else{
             $input['book_out'] = now();
             Rental::create($input);
-            return redirect('admin\rentals');
+            return redirect('admin/rentals');
         }
 
     }
@@ -91,8 +91,7 @@ class AdminRentalsController extends Controller
     public function edit($id)
     {
         //
-        $rental = Rental::findOrFail($id);
-        return view('admin.rentals.edit', compact('rental'));
+
     }
 
     /**
@@ -109,7 +108,7 @@ class AdminRentalsController extends Controller
         $rental->book_in = now();
         $rental->update();
 
-        return redirect('admin/rentals');
+        return redirect('admin/rentals/open');
 
     }
 
@@ -157,6 +156,33 @@ class AdminRentalsController extends Controller
         $rentals = Rental::where([['user_id', Auth::user()->id],['book_in', NULL], ['book_out', '<', $date->subDays(14)]])->paginate(15);
 
         return view('admin.rentals.user_late', compact('rentals'));
+    }
+
+    public function user_rent(Request $request){
+        $input = $request->all();
+        $user_rentals = Rental::where([['user_id', $input['user_id']], ['book_in', NULL]])->get();
+        $total_rentals = count($user_rentals);
+        $book_rentals = Rental::where([['book_id', $input['book_id']], ['book_in', NULL]])->get();
+        $total_books_rented = count($book_rentals);
+        $total_books = Book::findOrFail($input['book_id']);
+        if($total_rentals >= 7){
+            return redirect()->back()->with('alert', 'Sorry, je hebt reeds zeven boeken ontleend. Dit is het maximum.');
+        }elseif($total_books_rented >= $total_books->aantal){
+            return redirect()->back()->with('alert', 'Sorry, alle exemplaren van dit boek zijn reeds uitgeleend.');
+        }else{
+            $input['book_out'] = now();
+            Rental::create($input);
+            return redirect('admin/rentals/user');
+        }
+    }
+
+    public function user_rent_back(Request $request){
+
+        $rental = Rental::findOrFail($request->id);
+        $rental->book_in = now();
+        $rental->update();
+
+        return redirect('admin/rentals/user');
     }
 
 }

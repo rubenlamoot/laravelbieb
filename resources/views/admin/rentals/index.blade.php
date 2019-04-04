@@ -7,9 +7,7 @@
         <thead>
         <tr>
             <th scope="col">ID</th>
-
             <th scope="col">Ontleend door</th>
-
             <th scope="col">Boek</th>
             <th scope="col">Datum uit</th>
             <th scope="col">Datum in</th>
@@ -25,12 +23,7 @@
 
                     <td>{{$rental->book->title}}</td>
                     <td>{{$rental->book_out}}</td>
-                    <td>@if ($rental->book_in == NULL)
-                        <a href="{{route('rentals.edit', $rental->id)}}" class="btn btn-success">Terug brengen</a>
-                        @else
-                        {{$rental->book_in}}
-                        @endif
-                    </td>
+                    <td>{{$rental->book_in}}</td>
                 </tr>
             @endforeach
         @endif

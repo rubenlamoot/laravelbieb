@@ -65,6 +65,8 @@ class AdminBooksController extends Controller
     public function show($id)
     {
         //
+
+
     }
 
     /**
@@ -129,9 +131,10 @@ class AdminBooksController extends Controller
         //
     }
 
-    public function search(){
+    public function book_detail($id){
+        $book = Book::findOrFail($id);
 
-
-        return view('admin.books.search');
+        return view('admin.books.book_detail', compact('book'));
     }
+
 }
