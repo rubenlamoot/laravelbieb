@@ -27,11 +27,7 @@
                     @endforeach
                     </tbody>
                 </table>
-                <div class="row">
-                    <div class="col-12">
-                        {{$books->links()}}
-                    </div>
-                </div>
+
             @else
                 <h2>Geen resultaten gevonden</h2>
             @endif

@@ -44,6 +44,7 @@ class AdminBooksController extends Controller
     {
         //
         $input = $request->all();
+        $input['edition'] = $input['edition'] . 'e druk';
 
         if($file = $request->file('photo_id')){
             $name = time() . $file->getClientOriginalName();

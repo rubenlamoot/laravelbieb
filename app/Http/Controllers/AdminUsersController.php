@@ -85,7 +85,7 @@ class AdminUsersController extends Controller
 //        $address1 = Address::findOrFail($user->addresses);
         $address1 = $user->addresses;
 
-        $input_address = $request->except('name', 'email', 'password', 'first_name', 'last_name', 'insurance_nr');
+        $input_address = $request->except('name', 'email', 'password', 'first_name', 'last_name', 'insurance_nr', 'role_id', 'is_active');
 
         if(trim($request->password) == ''){
             $input = $request->except('password', 'street', 'house_nr', 'bus_nr', 'postal_code', 'city');

@@ -1,5 +1,7 @@
 @extends('layouts.admin')
-
+@php
+    $currentYear = date('Y');
+@endphp
 @section('content')
     <h1>Een boek wijzigen</h1>
 
@@ -23,7 +25,7 @@
 
             <div class="form-group">
                 {!! Form::label('published', 'Uitgavejaar:') !!}
-                {!! Form::text('published', null, ['class' => 'form-control']) !!}
+                {!! Form::selectRange('published', 1900, $currentYear,null, ['class' => 'form-control']) !!}
             </div>
 
             <div class="form-group">
@@ -33,7 +35,7 @@
 
             <div class="form-group">
                 {!! Form::label('aantal', 'Aantal:') !!}
-                {!! Form::text('aantal', null , ['class' => 'form-control']) !!}
+                {!! Form::select('aantal', array('' => 'Kies een optie') + range(0,20),null, ['class' => 'form-control']) !!}
             </div>
             <div class="form-group">
                 {!! Form::label('description', 'Beschrijving:') !!}
