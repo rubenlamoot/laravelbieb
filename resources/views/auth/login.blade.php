@@ -69,5 +69,14 @@
             </div>
         </div>
     </div>
+    <div class="row justify-content-center mt-3">
+        <div class="col-md-8">
+            @if (session('alert'))
+                <div class="alert alert-danger">
+                    {{ session('alert') }}
+                </div>
+            @endif
+        </div>
+    </div>
 </div>
 @endsection

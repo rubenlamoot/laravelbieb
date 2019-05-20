@@ -104,7 +104,7 @@
                                     <td>{{$book->title}}</td>
                                     <td>{{$book->author->name}}</td>
                                     <td>{{$book->description}}</td>
-                                    <td><a href="{{route('books.book_detail',$book->id)}}">Ontleen</a></td>
+                                    <td><a @auth href="{{route('books.book_detail',$book->id)}}" @else href="{{route('login')}}" @endauth>Ontleen</a></td>
                                 </tr>
                             @endforeach
                             </tbody>

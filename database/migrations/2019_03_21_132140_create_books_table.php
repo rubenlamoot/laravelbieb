@@ -24,6 +24,8 @@ class CreateBooksTable extends Migration
             $table->integer('photo_id')->nullable()->index()->unsigned();
             $table->integer('aantal');
             $table->timestamps();
+
+            $table->foreign('author_id')->references('id')->on('authors')->onDelete('cascade');
         });
     }
 

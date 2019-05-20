@@ -22,7 +22,9 @@ class FrontController extends Controller
             $books = '';
         }
         if(Auth::check()){
-            return view('admin.books.result', compact('books'));
+            if(Auth::user()->isActive()){
+                return view('admin.books.result', compact('books'));
+            }
         }
         return view('result', compact('books'));
     }

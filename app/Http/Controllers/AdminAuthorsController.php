@@ -95,5 +95,8 @@ class AdminAuthorsController extends Controller
     public function destroy($id)
     {
         //
+        $author = Author::findOrFail($id);
+        $author->delete();
+        return redirect('admin/authors');
     }
 }

@@ -28,7 +28,10 @@ class HomeController extends Controller
             if(Auth::user()->isAdmin()){
                 return view('admin.index');
             }
-            return view('/home');
+            if(Auth::user()->isActive()){
+                return view('/home');
+            }
+
         }
         return view('/welcome');
     }

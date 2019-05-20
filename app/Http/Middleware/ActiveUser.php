@@ -19,6 +19,9 @@ class ActiveUser
         if(Auth::check()){
             if(Auth::user()->isActive()){
                 return $next($request);
+            }else{
+                Auth::logout();
+                return redirect()->back()->with('alert', 'Je account is geblokkeerd, gelieve de bibliothecaris te contacteren');
             }
         }
         return redirect('/');

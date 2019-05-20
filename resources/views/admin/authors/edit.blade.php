@@ -1,7 +1,7 @@
 @extends('layouts.admin')
 
 @section('content')
-    <h1>Een auteur wijzigen</h1>
+    <h1>Een auteur wijzigen / verwijderen</h1>
 
     <div class="row">
         <div class="col-md-6">
@@ -17,11 +17,15 @@
             </div>
             {!! Form::close() !!}
 
+            {!! Form::open(['method' => 'DELETE', 'action' => ['AdminAuthorsController@destroy', $author->id]]) !!}
+            <div class="form-group">
+                {!! Form::submit('Verwijder auteur', ['class' => 'btn btn-danger']) !!}
+            </div>
+
+            {!! Form::close() !!}
+
             @include('includes.form-error')
         </div>
     </div>
-
-
-
 
 @stop
