@@ -16,12 +16,12 @@ class UsersTableSeeder extends Seeder
         factory('App\User', 5)->create();
         DB::table('users')->insert([
             'name' => 'Ruben Lamoot',
-            'email' => 'rubenlamoot@gmail.com',
+            'email' => 'rubenlamoot@test.com',
             'password' => bcrypt(123456),
             'remember_token' => Str::random(10),
             'first_name' => 'Ruben',
             'last_name' => 'Lamoot',
-            'insurance_nr' => '76012601928',
+            'insurance_nr' => '82011401976',
             'role_id' => 1,
             'is_active' => 1,
             'created_at' => now(),
