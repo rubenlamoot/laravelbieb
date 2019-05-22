@@ -130,6 +130,10 @@ class AdminBooksController extends Controller
     public function destroy($id)
     {
         //
+        $book = Book::findOrFail($id);
+        $book->delete();
+        return redirect('admin/books');
+
     }
 
     public function book_detail($id){

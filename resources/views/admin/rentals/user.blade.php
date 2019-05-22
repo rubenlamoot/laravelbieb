@@ -16,8 +16,14 @@
 
         @foreach($rentals as $rental)
             <tr>
-                <td>{{$rental->book->title}}</td>
-                <td>{{$rental->book->author->name}}</td>
+                @if ($book = App\Book::where('id', '=', $rental->book_id)->exists())
+                    <td>{{$rental->book->title}}</td>
+                    <td>{{$rental->book->author->name}}</td>
+                @else
+                    <td>Verwijderd boek</td>
+                    <td>Verwijderde auteur</td>
+                @endif
+
                 <td>{{$rental->book_out}}</td>
                 <td>@if ($rental->book_in == NULL)
                         {!! Form::open(['method'=>'PATCH', 'action'=>'AdminRentalsController@user_rent_back']) !!}

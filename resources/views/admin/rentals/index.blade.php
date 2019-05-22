@@ -20,8 +20,13 @@
                     <td>{{$rental->id}}</td>
 
                     <td><a href="{{route('users.show', $rental->user->id)}}">{{$rental->user->name}}</a></td>
+                    
+                    @if ($book = App\Book::where('id', '=', $rental->book_id)->exists())
+                        <td>{{$rental->book->title}}</td>
+                        @else
+                        <td>Verwijderd boek</td>
+                    @endif
 
-                    <td>{{$rental->book->title}}</td>
                     <td>{{$rental->book_out}}</td>
                     <td>{{$rental->book_in}}</td>
                 </tr>

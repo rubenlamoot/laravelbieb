@@ -27,7 +27,7 @@ class BooksRequest extends FormRequest
             //
             'title' => 'required|string',
             'author_id' => 'required',
-            'isbn' => 'required',
+            'isbn' => 'required|min:13|max:13',
             'published' => 'required',
             'edition' => 'required',
             'description' => 'required',
@@ -40,6 +40,8 @@ class BooksRequest extends FormRequest
             'title.required' => 'Titel is verplicht',
             'author_id.required' => 'Auteur is verplicht',
             'isbn.required' => 'Isbn is verplicht',
+            'isbn.min' => 'Isbn moet uit minstens 13 cijfers bestaan',
+            'isbn.max' => 'Isbn mag maar uit 13 cijfers bestaan',
             'published.required' => 'Jaar van uitgave is verplicht',
             'edition.required' => 'Editie is verplicht',
             'description.required' => 'Beschrijving is verplicht',

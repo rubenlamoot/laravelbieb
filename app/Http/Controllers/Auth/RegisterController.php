@@ -93,12 +93,6 @@ class RegisterController extends Controller
             'first_name' => $data['first_name'],
             'last_name' => $data['last_name'],
             'insurance_nr' => $data['insurance_nr'],
-//            'address_id' => $address->id,
-//            'street' => $data['street'],
-//            'house_nr' => $data['house_nr'],
-//            'bus_nr' => $data['bus_nr'],
-//            'postal_code' => $data['postal_code'],
-//            'city' => $data['city'],
         ]);
         $user->addresses()->save($address);
 

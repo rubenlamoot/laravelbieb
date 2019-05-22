@@ -2,10 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Address;
 use App\Http\Requests\UsersEditRequest;
 use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Hash;
 
 class UsersController extends Controller
 {
@@ -92,14 +95,16 @@ class UsersController extends Controller
         if(($address1[0]->street == $input_address['street']) && ($address1[0]->house_nr == $input_address['house_nr']) && ($address1[0]->bus_nr == $input_address['bus_nr']) && ($address1[0]->postal_code == $input_address['postal_code']) && ($address1[0]->city == $input_address['city'])){
 
         }else{
-            $aantal = DB::table('address_user')->where('address_id', $address1[0]->id)->count();
-
-            if($aantal > 1){
-                $address = Address::Create($input_address);
-                $address->update_address_user($user->id, $address1[0]->id, $address->id);
+            if($address2 = Address::where([['street', '=', $input_address['street']], ['house_nr', '=', $input_address['house_nr']], ['bus_nr', '=', $input_address['bus_nr']], ['postal_code', '=', $input_address['postal_code']], ['city', '=', $input_address['city']]])->first()) {
+                $address2->update_address_user($user->id, $address1[0]->id, $address2->id);
             }else{
-                $address1[0]->update($input_address);
-
+                $aantal = DB::table('address_user')->where('address_id', $address1[0]->id)->count();
+                if($aantal > 1){
+                    $address = Address::create($input_address);
+                    $address->update_address_user($user->id, $address1[0]->id, $address->id);
+                }else{
+                    $address1[0]->update($input_address);
+                }
             }
         }
 

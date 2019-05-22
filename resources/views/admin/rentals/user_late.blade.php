@@ -16,7 +16,11 @@
         @if($rentals)
             @foreach($rentals as $rental)
                 <tr>
-                    <td>{{$rental->book->title}}</td>
+                    @if ($book = App\Book::where('id', '=', $rental->book_id)->exists())
+                        <td>{{$rental->book->title}}</td>
+                    @else
+                        <td>Verwijderd boek</td>
+                    @endif
                     <td>{{$rental->book->author->name}}</td>
                     <td>{{$rental->book_out}}</td>
                     <td>boete</td>

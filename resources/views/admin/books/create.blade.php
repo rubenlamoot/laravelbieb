@@ -20,7 +20,7 @@
     </div>
     <div class="form-group">
         {!! Form::label('published', 'Jaar van uitgave:') !!}
-        {!! Form::selectRange('published', 1900, $currentYear,null, ['class' => 'form-control', 'placeholder' => 'Kies een optie']) !!}
+        {!! Form::selectRange('published', $currentYear, 1900, null, ['class' => 'form-control', 'placeholder' => 'Kies een optie']) !!}
     </div>
     <div class="form-group">
         {!! Form::label('edition', 'Editie:') !!}

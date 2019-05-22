@@ -14,8 +14,8 @@ class AddressesTableSeeder extends Seeder
         //
         factory('App\Address', 5)->create();
         DB::table('addresses')->insert([
-            'street' => 'Kloosterstraat',
-            'house_nr' => '5',
+            'street' => 'Adminstraat',
+            'house_nr' => '8',
             'postal_code' => '8647',
             'city' => 'Lo-Reninge',
             'created_at' => now(),

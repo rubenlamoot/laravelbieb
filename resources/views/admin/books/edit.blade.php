@@ -25,7 +25,7 @@
 
             <div class="form-group">
                 {!! Form::label('published', 'Uitgavejaar:') !!}
-                {!! Form::selectRange('published', 1900, $currentYear,null, ['class' => 'form-control']) !!}
+                {!! Form::selectRange('published', $currentYear, 1900, null, ['class' => 'form-control']) !!}
             </div>
 
             <div class="form-group">
@@ -58,6 +58,14 @@
     <div class="form-group">
         {!! Form::submit('Boek wijzigen', ['class' => 'btn btn-primary my-3']) !!}
     </div>
+    {!! Form::close() !!}
+
+    {!! Form::open(['method' => 'DELETE', 'action' => ['AdminBooksController@destroy', $book->id]]) !!}
+    <div class="form-group">
+        <p>Boek wordt echt verwijderd!!!!</p>
+        {!! Form::submit('Verwijder boek', ['class' => 'btn btn-danger']) !!}
+    </div>
+
     {!! Form::close() !!}
 
     @include('includes.form-error')

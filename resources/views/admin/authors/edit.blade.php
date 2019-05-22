@@ -19,6 +19,7 @@
 
             {!! Form::open(['method' => 'DELETE', 'action' => ['AdminAuthorsController@destroy', $author->id]]) !!}
             <div class="form-group">
+                <p>Als je een auteur verwijderd worden ook al zijn boeken verwijderd!!!!</p>
                 {!! Form::submit('Verwijder auteur', ['class' => 'btn btn-danger']) !!}
             </div>
 
