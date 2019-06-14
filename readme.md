@@ -15,7 +15,7 @@ inloggen als user met :
 email : test1@gmail.com
 paswoord : 123456
 
-inlogeen als admin:
+inloggen als admin:
 email : rubenlamoot@test.com
 paswoord : 123456
 
