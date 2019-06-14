@@ -1,12 +1,12 @@
 Installatie:
 
-git clone -- laravelbieb
-cd laravelbieb
-composer install
-maak database dblaravelbieb
-aanpassen env file
-php artisan key:generate
-php artisan migrate
+git clone -- laravelbieb, 
+cd laravelbieb, 
+composer install, 
+maak database dblaravelbieb, 
+aanpassen env file, 
+php artisan key:generate, 
+php artisan migrate, 
 php artisan db:seed
 
 Database:
